@@ -66,9 +66,9 @@ if __name__ == '__main__':
 
     # Report about weather station / observation location
     print
-    print u'Prognose des Bienenfluges am Standort {}'.format(result['station'])
+    print u'### Prognose des Bienenfluges am Standort {}'.format(result['station'])
     print
 
     # Output forecast data
     data = result['data']
-    print tabulate(data[1:], headers=data[0], showindex=False, tablefmt='psql').encode('utf-8')
+    print tabulate(data[1:], headers=data[0], showindex=False, tablefmt='pipe').encode('utf-8')
