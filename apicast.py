@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     # Report about weather station / observation location
     print
-    print u'### Prognose des Bienenfluges am Standort {}'.format(result['station'])
+    print u'### Prognose des Bienenfluges in {}'.format(result['station'])
     print
 
     # Output forecast data
