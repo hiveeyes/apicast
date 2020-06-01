@@ -26,19 +26,19 @@ from tabulate import tabulate
 
 def grok_beeflight_forecast(url):
 
-    # Navigate to HTTP resource
+    # Navigate to HTTP resource.
     user_agent = u'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36'
     browser = mechanicalsoup.StatefulBrowser(user_agent=user_agent)
     page = browser.open(url)
 
-    # Find content section and extract elements
+    # Find content section and extract elements.
     subject = page.soup.find(string=u'Prognose des Bienenfluges')
     station = subject.find_next('br').next.strip()
     table = subject.parent.find_next_sibling('table')
     # TODO: Read table footer "© Deutscher Wetterdienst, erstellt 12.04.2018 04:00 UTC"
 
     # Read HTML table
-    data = parse_html_table(unicode(table))
+    data = parse_html_table(table)
 
     # Ready.
     result = {
@@ -54,7 +54,7 @@ def parse_html_table(html):
     return extractor.return_list()
 
 
-if __name__ == '__main__':
+def main():
 
     # Sanity checks
     if len(sys.argv) < 2:
@@ -64,11 +64,18 @@ if __name__ == '__main__':
     # Fetch and extract forecast information
     result = grok_beeflight_forecast(url)
 
+    data = result['data']
+    if not data:
+        raise ValueError('No data found or unable to parse')
+
     # Report about weather station / observation location
-    print
-    print u'### Prognose des Bienenfluges in {}'.format(result['station'])
-    print
+    print()
+    print(u'### Prognose des Bienenfluges in {}'.format(result['station']))
+    print()
 
     # Output forecast data
-    data = result['data']
-    print tabulate(data[1:], headers=data[0], showindex=False, tablefmt='pipe').encode('utf-8')
+    print(tabulate(data[1:], headers=data[0], showindex=False, tablefmt='pipe'))
+
+
+if __name__ == '__main__':
+    main()
