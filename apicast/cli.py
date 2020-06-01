@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# (c) 2020 Andreas Motl <andreas@hiveeyes.org>
+# (c) 2018-2020 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
 import json
 import logging
+import tabulate
 from docopt import docopt, DocoptExit
-from tabulate import tabulate
 
 from apicast import __appname__, __version__
 from apicast.core import grok_beeflight_forecast, dwd_beeflight_forecast_stations, dwd_beeflight_site_url_by_slug
@@ -19,14 +19,15 @@ def run():
 
     Usage:
       apicast beeflight stations [--site-slugs]
-      apicast beeflight forecast --url=<url>
-      apicast beeflight forecast --station=<station>
+      apicast beeflight forecast --url=<url> [--format=<format>]
+      apicast beeflight forecast --station=<station> [--format=<format>]
       apicast --version
       apicast (-h | --help)
 
     Options:
       --url=<url>                       URL to detail page
       --station=<station>               Station identifier
+      --format=<format>                 Output format: "json" or "table". Default: json
       --version                         Show version information
       --debug                           Enable debug messages
       -h --help                         Show this screen
@@ -72,23 +73,39 @@ def run():
     # Fetch and extract forecast information.
     elif options.url:
         result = grok_beeflight_forecast(options.url)
-        format_beeflight_forecast(result)
+        format_beeflight_forecast(result, options.format)
 
     elif options.station:
         url = dwd_beeflight_site_url_by_slug(options.station)
         result = grok_beeflight_forecast(url)
-        format_beeflight_forecast(result)
+        format_beeflight_forecast(result, options.format)
 
 
-def format_beeflight_forecast(result):
+def format_beeflight_forecast(result, format='json'):
+
     data = result['data']
     if not data:
         raise ValueError('No data found or unable to parse')
 
-    # Report about weather station / observation location
-    print()
-    print(u'### Prognose des Bienenfluges in {}'.format(result['station']))
-    print()
+    format = format or 'json'
+    format = format.lower()
 
-    # Output forecast data
-    print(tabulate(data[1:], headers=data[0], showindex=False, tablefmt='pipe'))
+    if format not in ['json', 'table']:
+        raise ValueError('Unknown output format. Please specify "json" or "table".')
+
+    if format == 'json':
+        result = []
+        for item in data[1:]:
+            item = dict(zip(data[0], item))
+            result.append(item)
+        print(json.dumps(result, indent=4))
+
+    else:
+
+        # Report about weather station / observation location
+        print()
+        print(u'### Prognose des Bienenfluges in {}'.format(result['station']))
+        print()
+
+        # Output forecast data
+        print(tabulate.tabulate(data[1:], headers=data[0], showindex=False, tablefmt='pipe'))
