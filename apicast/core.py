@@ -1,5 +1,5 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# (c) 2018-2020 Andreas Motl <andreas@hiveeyes.org>
 """
 apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD)
 
@@ -9,19 +9,13 @@ from https://www.dwd.de/DE/fachnutzer/freizeitgaertner/1_gartenwetter/_node.html
 See also https://community.hiveeyes.org/t/dwd-prognose-bienenflug/787
 
 
-Prerequisites::
-
-    pip install MechanicalSoup==0.10.0 html-table-extractor==1.3.0 tabulate==0.8.2
-
 Synopsis::
 
-    python apicast.py https://www.dwd.de/DE/fachnutzer/freizeitgaertner/1_gartenwetter/berlin_brandenburg/potsdam/_node.html
+    apicast --url https://www.dwd.de/DE/fachnutzer/freizeitgaertner/1_gartenwetter/berlin_brandenburg/potsdam/_node.html
 
 """
-import sys
 import mechanicalsoup
 from html_table_extractor.extractor import Extractor
-from tabulate import tabulate
 
 
 def grok_beeflight_forecast(url):
@@ -52,30 +46,3 @@ def parse_html_table(html):
     extractor = Extractor(html)
     extractor.parse()
     return extractor.return_list()
-
-
-def main():
-
-    # Sanity checks
-    if len(sys.argv) < 2:
-        raise KeyError('Please specify url as single positional argument')
-    url = sys.argv[1]
-
-    # Fetch and extract forecast information
-    result = grok_beeflight_forecast(url)
-
-    data = result['data']
-    if not data:
-        raise ValueError('No data found or unable to parse')
-
-    # Report about weather station / observation location
-    print()
-    print(u'### Prognose des Bienenfluges in {}'.format(result['station']))
-    print()
-
-    # Output forecast data
-    print(tabulate(data[1:], headers=data[0], showindex=False, tablefmt='pipe'))
-
-
-if __name__ == '__main__':
-    main()
