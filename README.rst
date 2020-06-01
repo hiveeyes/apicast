@@ -12,10 +12,14 @@ Apicast acquires bee flight forecast information published by Deutscher Wetterdi
 ********
 Synopsis
 ********
-Acquire list of stations::
+Display list of states and sites::
 
-    ./extract_sites.sh
+    apicast beeflight stations
 
-Acquire information for given location ``berlin_brandenburg/potsdam``::
+Display list of site slugs::
 
-    apicast --url https://www.dwd.de/DE/fachnutzer/freizeitgaertner/1_gartenwetter/berlin_brandenburg/potsdam/_node.html
+    apicast beeflight stations --site-slugs
+
+Acquire information for given site slug ``berlin_brandenburg/potsdam``::
+
+    apicast beeflight forecast --station=berlin_brandenburg/potsdam

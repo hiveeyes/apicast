@@ -7,6 +7,7 @@ Development
 ===========
 - Convert to Python3
 - Add setup.py, README.rst and CHANGES.rst
+- Provide ``extract_sites.sh`` through ``apicast beeflight stations``
 
 
 2018-04-13 0.1.0
