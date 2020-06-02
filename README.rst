@@ -10,10 +10,14 @@ Apicast acquires bee flight forecast information published by Deutscher Wetterdi
 
 - **Source**: https://www.dwd.de/DE/fachnutzer/freizeitgaertner/1_gartenwetter/_node.html
 - **Documentation**:
+
   - https://www.dwd.de/DE/fachnutzer/freizeitgaertner/dokumentation/gw_bienenflug
   - https://www.dwd.de/DE/fachnutzer/freizeitgaertner/dokumentation/gw_bienenflug.pdf?__blob=publicationFile
   - https://community.hiveeyes.org/t/dwd-prognose-bienenflug/787
-- **Data copyright** © Deutscher Wetterdienst (DWD), Abteilung Agrarmeteorologie
+
+- **Data copyright**: © Deutscher Wetterdienst (DWD), Abteilung Agrarmeteorologie
+
+- **Live**: http://apicast.hiveeyes.org/
 
 
 *****
