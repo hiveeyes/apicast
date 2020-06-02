@@ -5,6 +5,10 @@ Apicast CHANGES
 
 Development
 ===========
+
+
+2020-06-02 0.4.0
+================
 - Improve documentation, naming things
 - Use "/beeflight/germany" as API URL prefix for data from DWD
 - Clean up session id which slipped into state url
