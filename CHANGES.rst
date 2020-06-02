@@ -6,6 +6,7 @@ Apicast CHANGES
 Development
 ===========
 - Improve documentation, naming things
+- Use "/beeflight/germany" as API URL prefix for data from DWD
 
 
 2020-06-02 0.3.0

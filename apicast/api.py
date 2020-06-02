@@ -46,19 +46,19 @@ def index():
     """
 
 
-@app.get("/beeflight/stations")
+@app.get("/beeflight/germany/stations")
 def beeflight_stations():
     stations = dwd_beeflight_forecast_stations()
     return make_response(stations)
 
 
-@app.get("/beeflight/stations/site-slugs")
+@app.get("/beeflight/germany/stations/site-slugs")
 def beeflight_stations_site_slugs():
     slugs = dwd_beeflight_forecast_stations_site_slugs()
     return make_response(slugs)
 
 
-@app.get("/beeflight/forecast/{state}/{site}")
+@app.get("/beeflight/germany/forecast/{state}/{site}")
 def beeflight_forecast_by_slug(state: str, site: str):
     station_slug = f"{state}/{site}"
 
