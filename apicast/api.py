@@ -3,7 +3,7 @@
 # License: GNU Affero General Public License, Version 3
 import logging
 from fastapi import FastAPI, Query
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse
 
 from apicast import __appname__, __version__
 from apicast.core import dwd_beeflight_forecast_stations, dwd_beeflight_forecast_stations_site_slugs, \
@@ -44,6 +44,14 @@ def index():
         </body>
     </html>
     """
+
+
+@app.get("/robots.txt", response_class=PlainTextResponse)
+def robots():
+    return f"""
+User-agent: *
+Disallow: /beeflight/
+    """.strip()
 
 
 @app.get("/beeflight/germany/stations")

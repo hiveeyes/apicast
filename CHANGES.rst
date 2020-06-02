@@ -7,6 +7,11 @@ Development
 ===========
 
 
+2020-06-02 0.5.0
+================
+- Add "robots.txt" to HTTP API
+
+
 2020-06-02 0.4.0
 ================
 - Improve documentation, naming things
