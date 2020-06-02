@@ -15,6 +15,7 @@ Synopsis::
 
 """
 import re
+import ttl_cache
 import mechanicalsoup
 from munch import Munch
 from html_table_extractor.extractor import Extractor
@@ -27,6 +28,7 @@ producer_name = "Apicast"
 producer_link = "https://github.com/hiveeyes/apicast"
 
 
+@ttl_cache(60 * 60 * 24)
 def dwd_beeflight_forecast_stations():
 
     base_url = "https://www.dwd.de/"
@@ -93,6 +95,7 @@ def dwd_beeflight_site_url_by_slug(slug):
     return url
 
 
+@ttl_cache(60)
 def dwd_beeflight_forecast_data(url):
 
     # Navigate to HTTP resource.

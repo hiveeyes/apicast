@@ -59,6 +59,7 @@ setup(
         "tabulate==0.8.7",
         "docopt==0.6.2",
         "munch==2.5.0",
+        "ttl-cache==1.6",
     ],
     extras_require={
         'service': [
