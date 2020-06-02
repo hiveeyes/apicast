@@ -7,7 +7,7 @@ import tabulate
 from docopt import docopt, DocoptExit
 
 from apicast import __appname__, __version__
-from apicast.core import grok_beeflight_forecast, dwd_beeflight_forecast_stations, dwd_beeflight_site_url_by_slug, \
+from apicast.core import dwd_beeflight_forecast_data, dwd_beeflight_forecast_stations, dwd_beeflight_site_url_by_slug, \
     dwd_beeflight_forecast_stations_site_slugs
 from apicast.util import normalize_options, setup_logging
 
@@ -82,12 +82,12 @@ def run():
 
     # Fetch and extract forecast information.
     elif options.url:
-        result = grok_beeflight_forecast(options.url)
+        result = dwd_beeflight_forecast_data(options.url)
         format_beeflight_forecast(result, options.format)
 
     elif options.station:
         url = dwd_beeflight_site_url_by_slug(options.station)
-        result = grok_beeflight_forecast(url)
+        result = dwd_beeflight_forecast_data(url)
         format_beeflight_forecast(result, options.format)
 
 

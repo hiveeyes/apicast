@@ -5,6 +5,7 @@ Apicast CHANGES
 
 Development
 ===========
+- Improve documentation, naming things
 
 
 2020-06-02 0.3.0

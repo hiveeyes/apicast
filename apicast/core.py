@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) 2018-2020 Andreas Motl <andreas@hiveeyes.org>
 """
-apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD)
+Apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD).
 
 Parse information about "Gartenwetter » Bienenflug"
 from https://www.dwd.de/DE/fachnutzer/freizeitgaertner/1_gartenwetter/_node.html ff.
@@ -20,7 +20,11 @@ from munch import Munch
 from html_table_extractor.extractor import Extractor
 
 
-user_agent = u"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36"
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36"
+dwd_source = "https://www.dwd.de/DE/fachnutzer/freizeitgaertner/1_gartenwetter/_node.html"
+dwd_copyright = "© Deutscher Wetterdienst (DWD), Abteilung Agrarmeteorologie"
+producer_name = "Apicast"
+producer_link = "https://github.com/hiveeyes/apicast"
 
 
 def dwd_beeflight_forecast_stations():
@@ -89,7 +93,7 @@ def dwd_beeflight_site_url_by_slug(slug):
     return url
 
 
-def grok_beeflight_forecast(url):
+def dwd_beeflight_forecast_data(url):
 
     # Navigate to HTTP resource.
     browser = mechanicalsoup.StatefulBrowser(user_agent=user_agent)

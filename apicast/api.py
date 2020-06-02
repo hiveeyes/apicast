@@ -7,7 +7,7 @@ from fastapi.responses import HTMLResponse
 
 from apicast import __appname__, __version__
 from apicast.core import dwd_beeflight_forecast_stations, dwd_beeflight_forecast_stations_site_slugs, \
-    dwd_beeflight_site_url_by_slug, grok_beeflight_forecast
+    dwd_beeflight_site_url_by_slug, dwd_beeflight_forecast_data, dwd_source, dwd_copyright, producer_name, producer_link
 
 app = FastAPI()
 
@@ -24,18 +24,22 @@ def index():
             <title>{appname}</title>
         </head>
         <body>
+            <h3>About</h3>
             {about}
-            <hr/>
-            Index
             <ul>
-            <li><a href="beeflight/stations">List of federal states / sites</a></li>
-            <li><a href="beeflight/stations/site-slugs">List of site slugs</a></li>
+            <li>Source: DWD » Freizeitgärtner » Gartenwetter - <a href="{dwd_source}">{dwd_source}</a></li>
+            <li>Producer: {producer_name} - <a href="{producer_link}">{producer_link}</a></li>
+            <li>Data copyright: {dwd_copyright}</li>
             </ul>
-            <hr/>
-            Examples
+            <h3>Index</h3>
             <ul>
-            <li><a href="beeflight/forecast/berlin_brandenburg/potsdam">Bee flight forecast for "berlin_brandenburg/potsdam"</a></li>
-            <li><a href="beeflight/forecast/bayern/regensburg">Bee flight forecast for "bayern/regensburg"</a></li>
+            <li><a href="beeflight/germany/stations">List of federal states / sites</a></li>
+            <li><a href="beeflight/germany/stations/site-slugs">List of site slugs</a></li>
+            </ul>
+            <h3>Examples</h3>
+            <ul>
+            <li><a href="beeflight/germany/forecast/berlin_brandenburg/potsdam">Bee flight forecast for "berlin_brandenburg/potsdam"</a></li>
+            <li><a href="beeflight/germany/forecast/bayern/regensburg">Bee flight forecast for "bayern/regensburg"</a></li>
             </ul>
         </body>
     </html>
@@ -45,13 +49,13 @@ def index():
 @app.get("/beeflight/stations")
 def beeflight_stations():
     stations = dwd_beeflight_forecast_stations()
-    return stations
+    return make_response(stations)
 
 
 @app.get("/beeflight/stations/site-slugs")
 def beeflight_stations_site_slugs():
     slugs = dwd_beeflight_forecast_stations_site_slugs()
-    return slugs
+    return make_response(slugs)
 
 
 @app.get("/beeflight/forecast/{state}/{site}")
@@ -60,7 +64,7 @@ def beeflight_forecast_by_slug(state: str, site: str):
 
     try:
         url = dwd_beeflight_site_url_by_slug(station_slug)
-        result = grok_beeflight_forecast(url)
+        result = dwd_beeflight_forecast_data(url)
         data = result['data']
         if not data:
             raise ValueError('No data found or unable to parse')
@@ -72,7 +76,19 @@ def beeflight_forecast_by_slug(state: str, site: str):
         item = dict(zip(data[0], item))
         result.append(item)
 
-    return result
+    return make_response(result)
+
+
+def make_response(data):
+    response = {
+        'meta': {
+            'source': dwd_source,
+            'copyright': dwd_copyright,
+            'producer': f'{producer_name} - {producer_link}',
+        },
+        'data': data,
+    }
+    return response
 
 
 def start_service(listen_address):
