@@ -75,6 +75,15 @@ def dwd_beeflight_forecast_stations():
     return results
 
 
+def dwd_beeflight_forecast_stations_site_slugs():
+    stations = dwd_beeflight_forecast_stations()
+    slugs = []
+    for station in stations:
+        for site in station.sites:
+            slugs.append(site.slug)
+    return slugs
+
+
 def dwd_beeflight_site_url_by_slug(slug):
     url = f"https://www.dwd.de/DE/fachnutzer/freizeitgaertner/1_gartenwetter/{slug}/_node.html"
     return url
@@ -88,6 +97,8 @@ def grok_beeflight_forecast(url):
 
     # Find content section and extract elements.
     subject = page.soup.find(string=u'Prognose des Bienenfluges')
+    if not subject:
+        raise ValueError('No forecast available for this station')
     station = subject.find_next('br').next.strip()
     table = subject.parent.find_next_sibling('table')
     # TODO: Read table footer "© Deutscher Wetterdienst, erstellt 12.04.2018 04:00 UTC"

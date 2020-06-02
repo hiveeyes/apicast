@@ -7,7 +7,8 @@ import tabulate
 from docopt import docopt, DocoptExit
 
 from apicast import __appname__, __version__
-from apicast.core import grok_beeflight_forecast, dwd_beeflight_forecast_stations, dwd_beeflight_site_url_by_slug
+from apicast.core import grok_beeflight_forecast, dwd_beeflight_forecast_stations, dwd_beeflight_site_url_by_slug, \
+    dwd_beeflight_forecast_stations_site_slugs
 from apicast.util import normalize_options, setup_logging
 
 log = logging.getLogger(__name__)
@@ -21,6 +22,7 @@ def run():
       apicast beeflight stations [--site-slugs]
       apicast beeflight forecast --url=<url> [--format=<format>]
       apicast beeflight forecast --station=<station> [--format=<format>]
+      apicast service [--listen=<listen>]
       apicast --version
       apicast (-h | --help)
 
@@ -28,6 +30,7 @@ def run():
       --url=<url>                       URL to detail page
       --station=<station>               Station identifier
       --format=<format>                 Output format: "json" or "table". Default: json
+      --listen=<listen>                 HTTP server listen address. [Default: localhost:24640]
       --version                         Show version information
       --debug                           Enable debug messages
       -h --help                         Show this screen
@@ -57,18 +60,25 @@ def run():
     # Debugging
     log.debug('Options: {}'.format(json.dumps(options, indent=4)))
 
+    # Run service.
+    if options.service:
+        listen_address = options.listen
+        log.info(f'Starting {name}')
+        log.info(f'Starting web service on {listen_address}')
+        from apicast.api import start_service
+        start_service(listen_address)
+        return
+
     # Run command.
     if options.stations:
-        stations = dwd_beeflight_forecast_stations()
 
         if options.site_slugs:
-            slugs = []
-            for station in stations:
-                for site in station.sites:
-                    slugs.append(site.slug)
-            print(json.dumps(slugs, indent=4))
+            result = dwd_beeflight_forecast_stations_site_slugs()
+
         else:
-            print(json.dumps(stations, indent=4))
+            result = dwd_beeflight_forecast_stations()
+
+        print(json.dumps(result, indent=4))
 
     # Fetch and extract forecast information.
     elif options.url:

@@ -30,6 +30,10 @@ Acquire information for given site slug ``berlin_brandenburg/potsdam``, output a
 
     apicast beeflight forecast --station=berlin_brandenburg/potsdam --format=table
 
+Start HTTP API service::
+
+    apicast service
+
 
 *******
 Example

@@ -60,5 +60,11 @@ setup(
         "docopt==0.6.2",
         "munch==2.5.0",
     ],
+    extras_require={
+        'service': [
+            'fastapi==0.55.1',
+            'uvicorn==0.11.5',
+        ],
+    },
     entry_points={"console_scripts": ["apicast = apicast.cli:run"]},
 )

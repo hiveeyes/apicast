@@ -7,6 +7,11 @@ Development
 ===========
 
 
+2020-06-02 0.3.0
+================
+- Add HTTP API based on FastAPI
+
+
 2020-06-02 0.2.0
 ================
 - Convert to Python3

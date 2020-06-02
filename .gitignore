@@ -3,3 +3,4 @@
 apicast_sites.txt
 *.pyc
 *.egg-info
+/dist
