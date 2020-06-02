@@ -33,13 +33,13 @@ def index():
             </ul>
             <h3>Index</h3>
             <ul>
-            <li><a href="beeflight/germany/stations">List of federal states / sites</a></li>
-            <li><a href="beeflight/germany/stations/site-slugs">List of site slugs</a></li>
+            <li><a href="beeflight/stations/germany">List of federal states / sites</a></li>
+            <li><a href="beeflight/stations/germany/site-slugs">List of site slugs</a></li>
             </ul>
             <h3>Examples</h3>
             <ul>
-            <li><a href="beeflight/germany/forecast/berlin_brandenburg/potsdam">Bee flight forecast for "berlin_brandenburg/potsdam"</a></li>
-            <li><a href="beeflight/germany/forecast/bayern/regensburg">Bee flight forecast for "bayern/regensburg"</a></li>
+            <li><a href="beeflight/forecast/germany/berlin_brandenburg/potsdam">Bee flight forecast for "berlin_brandenburg/potsdam"</a></li>
+            <li><a href="beeflight/forecast/germany/bayern/regensburg">Bee flight forecast for "bayern/regensburg"</a></li>
             </ul>
         </body>
     </html>
@@ -54,19 +54,19 @@ Disallow: /beeflight/
     """.strip()
 
 
-@app.get("/beeflight/germany/stations")
+@app.get("/beeflight/stations/germany")
 def beeflight_stations():
     stations = dwd_beeflight_forecast_stations()
     return make_response(stations)
 
 
-@app.get("/beeflight/germany/stations/site-slugs")
+@app.get("/beeflight/stations/germany/site-slugs")
 def beeflight_stations_site_slugs():
     slugs = dwd_beeflight_forecast_stations_site_slugs()
     return make_response(slugs)
 
 
-@app.get("/beeflight/germany/forecast/{state}/{site}")
+@app.get("/beeflight/forecast/germany/{state}/{site}")
 def beeflight_forecast_by_slug(state: str, site: str):
     station_slug = f"{state}/{site}"
 

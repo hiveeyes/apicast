@@ -7,6 +7,11 @@ Development
 ===========
 
 
+2020-06-02 0.6.0
+================
+- Change API URI format again
+
+
 2020-06-02 0.5.0
 ================
 - Add "robots.txt" to HTTP API
