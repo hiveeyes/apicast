@@ -7,6 +7,7 @@ Development
 ===========
 - Improve documentation, naming things
 - Use "/beeflight/germany" as API URL prefix for data from DWD
+- Clean up session id which slipped into state url
 
 
 2020-06-02 0.3.0

@@ -51,7 +51,7 @@ def dwd_beeflight_forecast_stations():
 
         state = Munch({
             'title': state_title,
-            'url': state_url,
+            'url': re.sub(';jsessionid=.*', '', state_url),
             'slug': state_slug,
             'sites': [],
         })
