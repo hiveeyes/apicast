@@ -60,7 +60,7 @@ setup(
         "docopt==0.6.2",
         "munch==2.5.0",
         "ttl-cache==1.6",
-        "python-dateutil>=2.8.0",
+        "dateparser==0.7.4",
     ],
     extras_require={
         'service': [

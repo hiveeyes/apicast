@@ -5,7 +5,7 @@ from contextlib import redirect_stdout
 
 import tabulate
 from datetime import datetime
-from dateutil.parser import parse as parsedate
+from dateparser import parse as parsedate
 
 
 class Formatter:
@@ -64,7 +64,7 @@ class Formatter:
             for key, value in item.items():
                 if key == 'date':
                     value += str(datetime.now().year)
-                    value = parsedate(value, fuzzy=True).strftime('%Y-%m-%d')
+                    value = parsedate(value).strftime('%Y-%m-%d')
                 elif value in self.STRENGTH_MACHINE_MAP.keys():
                     value = self.STRENGTH_MACHINE_MAP[value]
                 item[key] = value

@@ -7,6 +7,11 @@ Development
 ===========
 
 
+2020-06-04 0.7.1
+================
+- Fix parsing German dates
+
+
 2020-06-04 0.7.0
 ================
 - Add machine-readable output format ``json-machine``
