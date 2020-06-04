@@ -49,11 +49,26 @@ Acquire information for given site slug ``berlin_brandenburg/potsdam``::
 
 Acquire information for given site slug ``berlin_brandenburg/potsdam``, output as table in Markdown format::
 
-    apicast beeflight forecast --station=berlin_brandenburg/potsdam --format=table
+    apicast beeflight forecast --station=berlin_brandenburg/potsdam --format=table-markdown
+
+
+********
+HTTP API
+********
 
 Start HTTP API service::
 
     apicast service
+
+There are different endpoints and query parameters. Go figure:
+
+- http://localhost:24640/beeflight/stations/germany
+- http://localhost:24640/beeflight/stations/germany/site-slugs
+- http://localhost:24640/beeflight/forecast/germany/berlin_brandenburg/potsdam?translate=false
+- http://localhost:24640/beeflight/forecast/germany/berlin_brandenburg/potsdam?translate=true
+- http://localhost:24640/beeflight/forecast/germany/berlin_brandenburg/potsdam?format=json
+- http://localhost:24640/beeflight/forecast/germany/berlin_brandenburg/potsdam?format=table-markdown
+- http://localhost:24640/beeflight/forecast/germany/berlin_brandenburg/potsdam?format=json-machine
 
 
 *******

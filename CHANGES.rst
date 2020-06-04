@@ -7,6 +7,12 @@ Development
 ===========
 
 
+2020-06-04 0.7.0
+================
+- Add machine-readable output format ``json-machine``
+- Output formatting available via CLI and HTTP API
+
+
 2020-06-02 0.6.0
 ================
 - Change API URI format again

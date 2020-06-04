@@ -2,12 +2,15 @@
 # (c) 2020 Andreas Motl <andreas@terkin.org>
 # License: GNU Affero General Public License, Version 3
 import logging
+from copy import deepcopy
+
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
 from apicast import __appname__, __version__
 from apicast.core import dwd_beeflight_forecast_stations, dwd_beeflight_forecast_stations_site_slugs, \
     dwd_beeflight_site_url_by_slug, dwd_beeflight_forecast_data, dwd_source, dwd_copyright, producer_name, producer_link
+from apicast.format import Formatter
 
 app = FastAPI()
 
@@ -57,37 +60,46 @@ Disallow: /beeflight/
 @app.get("/beeflight/stations/germany")
 def beeflight_stations():
     stations = dwd_beeflight_forecast_stations()
-    return make_response(stations)
+    return make_json_response(stations)
 
 
 @app.get("/beeflight/stations/germany/site-slugs")
 def beeflight_stations_site_slugs():
     slugs = dwd_beeflight_forecast_stations_site_slugs()
-    return make_response(slugs)
+    return make_json_response(slugs)
 
 
 @app.get("/beeflight/forecast/germany/{state}/{site}")
-def beeflight_forecast_by_slug(state: str, site: str):
+def beeflight_forecast_by_slug(state: str, site: str, format: str = Query(default='json'), translate: bool = Query(default=False)):
     station_slug = f"{state}/{site}"
 
     try:
         url = dwd_beeflight_site_url_by_slug(station_slug)
-        result = dwd_beeflight_forecast_data(url)
+        result = deepcopy(dwd_beeflight_forecast_data(url))
         data = result['data']
         if not data:
             raise ValueError('No data found or unable to parse')
     except Exception as ex:
         return {'error': str(ex)}
 
-    result = []
-    for item in data[1:]:
-        item = dict(zip(data[0], item))
-        result.append(item)
+    formatter = Formatter(result)
 
-    return make_response(result)
+    if translate:
+        formatter.translate()
+
+    if format == 'json-machine':
+        response = formatter.machinify()
+
+    elif format == 'table-markdown':
+        return PlainTextResponse(formatter.table_markdown())
+
+    else:
+        response = formatter.normalize()
+
+    return make_json_response(response)
 
 
-def make_response(data):
+def make_json_response(data):
     response = {
         'meta': {
             'source': dwd_source,

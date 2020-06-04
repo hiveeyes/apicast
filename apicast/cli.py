@@ -3,13 +3,13 @@
 # License: GNU Affero General Public License, Version 3
 import json
 import logging
-import tabulate
 from docopt import docopt, DocoptExit
 
 from apicast import __appname__, __version__
+from apicast.util import normalize_options, setup_logging
 from apicast.core import dwd_beeflight_forecast_data, dwd_beeflight_forecast_stations, dwd_beeflight_site_url_by_slug, \
     dwd_beeflight_forecast_stations_site_slugs
-from apicast.util import normalize_options, setup_logging
+from apicast.format import Formatter
 
 log = logging.getLogger(__name__)
 
@@ -100,22 +100,17 @@ def format_beeflight_forecast(result, format='json'):
     format = format or 'json'
     format = format.lower()
 
-    if format not in ['json', 'table']:
-        raise ValueError('Unknown output format. Please specify "json" or "table".')
-
     if format == 'json':
-        result = []
-        for item in data[1:]:
-            item = dict(zip(data[0], item))
-            result.append(item)
-        print(json.dumps(result, indent=4))
+        response = Formatter(result).normalize()
+        print(json.dumps(response, indent=4))
+
+    elif format == 'json-machine':
+        response = Formatter(result).machinify()
+        print(json.dumps(response, indent=4))
+
+    elif format == 'table-markdown':
+        response = Formatter(result).table_markdown()
+        print(response)
 
     else:
-
-        # Report about weather station / observation location
-        print()
-        print(u'### Prognose des Bienenfluges in {}'.format(result['station']))
-        print()
-
-        # Output forecast data
-        print(tabulate.tabulate(data[1:], headers=data[0], showindex=False, tablefmt='pipe'))
+        raise ValueError('Unknown output format. Please specify "json", "json-machine" or "table-markdown".')
