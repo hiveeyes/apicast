@@ -54,13 +54,16 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "MechanicalSoup==0.12.0",
-        "html-table-extractor==1.4.1",
         "tabulate==0.8.7",
         "docopt==0.6.2",
         "munch==2.5.0",
         "ttl-cache==1.6",
-        "dateparser==0.7.4",
+        "beautifulsoup4>=4,<5",
+        "html-table-extractor>=1,<2",
+        "jsonpickle>=2,<3"
+        "python-slugify>=4,<5",
+        "dateparser>=0.7.4,<1",
+        "tzlocal>=2,<3",
     ],
     extras_require={
         'service': [

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) 2020 Andreas Motl <andreas@hiveeyes.org>
+# (c) 2020-2021 Andreas Motl <andreas@hiveeyes.org>
+# License: GNU Affero General Public License, Version 3
 import io
 from contextlib import redirect_stdout
 
@@ -40,7 +41,7 @@ class Formatter:
 
     def __init__(self, result):
         self.result = result
-        self.data = result["data"]
+        self.data = result.data
 
     def translate(self):
         for item in self.data:
@@ -74,7 +75,7 @@ class Formatter:
         with io.StringIO() as buffer, redirect_stdout(buffer):
 
             # Report about weather station / observation location
-            print(u'### Prognose des Bienenfluges in {}'.format(self.result['station']))
+            print(u'### Prognose des Bienenfluges in {}'.format(self.result.station_name))
             print()
 
             # Output forecast data

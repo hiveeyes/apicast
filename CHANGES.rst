@@ -5,6 +5,7 @@ Apicast CHANGES
 
 Development
 ===========
+- Adjust scraping machinery to updated upstream interface
 
 
 2020-06-04 0.7.1

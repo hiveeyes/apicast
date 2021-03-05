@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-# (c) 2018-2020 Andreas Motl <andreas@hiveeyes.org>
+# (c) 2018-2021 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
 import json
 import logging
-from docopt import docopt, DocoptExit
+
+import jsonpickle
+from docopt import docopt
 
 from apicast import __appname__, __version__
 from apicast.util import normalize_options, setup_logging
-from apicast.core import dwd_beeflight_forecast_data, dwd_beeflight_forecast_stations, dwd_beeflight_site_url_by_slug, \
-    dwd_beeflight_forecast_stations_site_slugs
+from apicast.core import DwdBeeflightForecast
 from apicast.format import Formatter
 
 log = logging.getLogger(__name__)
@@ -19,8 +20,7 @@ def run():
     Access bee flight forecast information published by Deutscher Wetterdienst (DWD).
 
     Usage:
-      apicast beeflight stations [--site-slugs]
-      apicast beeflight forecast --url=<url> [--format=<format>]
+      apicast beeflight stations [--slugs]
       apicast beeflight forecast --station=<station> [--format=<format>]
       apicast service [--listen=<listen>]
       apicast --version
@@ -29,7 +29,7 @@ def run():
     Options:
       --url=<url>                       URL to detail page
       --station=<station>               Station identifier
-      --format=<format>                 Output format: "json" or "table". Default: json
+      --format=<format>                 Output format: "json", "json-machine" or "table-markdown". Default: json
       --listen=<listen>                 HTTP server listen address. [Default: localhost:24640]
       --version                         Show version information
       --debug                           Enable debug messages
@@ -38,10 +38,19 @@ def run():
     Examples::
 
         # Display list of stations
-        apicast stations
+        apicast beeflight stations
 
-        # Display bee flight forecast for Potsdam
-        apicast --station=berlin_brandenburg/potsdam
+        # Display list of station slugs
+        apicast beeflight stations --slugs
+
+        # Display bee flight forecast for Potsdam in JSON format
+        apicast beeflight forecast --station=brandenburg/potsdam
+
+        # Display bee flight forecast for Potsdam in Markdown format
+        apicast beeflight forecast --station=brandenburg/potsdam --format=table-markdown
+
+        # Display bee flight forecast for Potsdam in JSON machine readable format
+        apicast beeflight forecast --station=brandenburg/potsdam --format=json-machine
 
     """
 
@@ -69,32 +78,29 @@ def run():
         start_service(listen_address)
         return
 
+    dbf = DwdBeeflightForecast()
+
     # Run command.
     if options.stations:
 
-        if options.site_slugs:
-            result = dwd_beeflight_forecast_stations_site_slugs()
+        if options.slugs:
+            result = dbf.get_station_slugs()
+            print("\n".join(result))
 
         else:
-            result = dwd_beeflight_forecast_stations()
-
-        print(json.dumps(result, indent=4))
+            result = dbf.get_stations()
+            print(jsonpickle.encode(result, unpicklable=False, indent=4))
 
     # Fetch and extract forecast information.
-    elif options.url:
-        result = dwd_beeflight_forecast_data(options.url)
-        format_beeflight_forecast(result, options.format)
-
     elif options.station:
-        url = dwd_beeflight_site_url_by_slug(options.station)
-        result = dwd_beeflight_forecast_data(url)
+        station = dbf.get_station_by_slug(options.station)
+        result = dbf.get_data(station=station)
         format_beeflight_forecast(result, options.format)
 
 
 def format_beeflight_forecast(result, format='json'):
 
-    data = result['data']
-    if not data:
+    if not result.data:
         raise ValueError('No data found or unable to parse')
 
     format = format or 'json'
