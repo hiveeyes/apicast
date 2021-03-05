@@ -119,13 +119,13 @@ Disallow: /beeflight/
 @app.get("/beeflight/stations/germany")
 def beeflight_stations():
     stations = dbf.get_stations()
-    return make_json_response(stations)
+    return make_json_response(data=stations, location="germany")
 
 
 @app.get("/beeflight/stations/germany/locations")
 def beeflight_stations_site_slugs():
     slugs = dbf.get_station_slugs()
-    return make_json_response(slugs)
+    return make_json_response(data=slugs, location="germany")
 
 
 @app.get("/beeflight/forecast/germany/{state}/{station}")
@@ -160,10 +160,10 @@ def beeflight_forecast_by_slug(
     else:
         response = formatter.normalize()
 
-    return make_json_response(location=station_slug, data=response)
+    return make_json_response(data=response, location=station_slug)
 
 
-def make_json_response(location: str, data: List[Dict]):
+def make_json_response(data: List[Dict], location: str = None):
     response = {
         "meta": {
             "source": dwd_source,

@@ -7,6 +7,11 @@ Development
 ===========
 
 
+2021-03-05 0.8.2
+================
+- Fix HTTP API endpoint for locations
+
+
 2021-03-05 0.8.1
 ================
 - Fix type hints and missing dependencies
