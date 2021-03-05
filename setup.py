@@ -15,6 +15,13 @@ setup(
     license="AGPL 3, EUPL 1.2",
     classifiers=[
         "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: Implementation :: CPython",
+        "Programming Language :: Python :: Implementation :: PyPy",
         "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)",
         "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
         "Development Status :: 4 - Beta",
@@ -44,7 +51,7 @@ setup(
     author="Andreas Motl",
     author_email="andreas@hiveeyes.org",
     url="https://github.com/hiveeyes/apicast",
-    keywords="bee flight forecast information "
+    keywords="honey bee apis mellifera flight forecast information "
     "dwd cdc deutscher wetterdienst climate data center weather "
     "opendata data acquisition transformation export "
     "geospatial temporal timeseries "
@@ -54,21 +61,20 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "tabulate==0.8.7",
-        "docopt==0.6.2",
-        "munch==2.5.0",
-        "ttl-cache==1.6",
+        "ttl-cache>=1.6,<2",
         "beautifulsoup4>=4,<5",
         "html-table-extractor>=1,<2",
+        "docopt>=0.6,<1",
         "jsonpickle>=2,<3"
         "python-slugify>=4,<5",
+        "tabulate>=0.8,<1",
         "dateparser>=0.7.4,<1",
         "tzlocal>=2,<3",
     ],
     extras_require={
-        'service': [
-            'fastapi==0.55.1',
-            'uvicorn==0.11.5',
+        "service": [
+            "fastapi>=0.55.1,<0.64",
+            "uvicorn<=0.13.3",
         ],
     },
     entry_points={"console_scripts": ["apicast = apicast.cli:run"]},
