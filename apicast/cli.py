@@ -8,9 +8,9 @@ import jsonpickle
 from docopt import docopt
 
 from apicast import __appname__, __version__
-from apicast.util import normalize_options, setup_logging
 from apicast.core import DwdBeeflightForecast
 from apicast.format import Formatter
+from apicast.util import normalize_options, setup_logging
 
 log = logging.getLogger(__name__)
 
@@ -60,27 +60,28 @@ def run():
 
     """
 
-    name = f'{__appname__} {__version__}'
+    name = f"{__appname__} {__version__}"
 
     # Parse command line arguments
     options = normalize_options(docopt(run.__doc__, version=name))
 
     # Setup logging
-    debug = options.get('debug')
+    debug = options.get("debug")
     log_level = logging.INFO
     if debug:
         log_level = logging.DEBUG
     setup_logging(log_level)
 
     # Debugging
-    log.debug('Options: {}'.format(json.dumps(options, indent=4)))
+    log.debug("Options: {}".format(json.dumps(options, indent=4)))
 
     # Run service.
     if options.service:
         listen_address = options.listen
-        log.info(f'Starting {name}')
-        log.info(f'Starting web service on {listen_address}')
+        log.info(f"Starting {name}")
+        log.info(f"Starting web service on {listen_address}")
         from apicast.api import start_service
+
         start_service(listen_address, options.reload)
         return
 
@@ -104,25 +105,27 @@ def run():
         format_beeflight_forecast(result, options.format)
 
 
-def format_beeflight_forecast(result, format='json'):
+def format_beeflight_forecast(result, format="json"):
 
     if not result.data:
-        raise ValueError('No data found or unable to parse')
+        raise ValueError("No data found or unable to parse")
 
-    format = format or 'json'
+    format = format or "json"
     format = format.lower()
 
-    if format == 'json':
+    if format == "json":
         response = Formatter(result).normalize()
         print(json.dumps(response, indent=4))
 
-    elif format == 'json-machine':
+    elif format == "json-machine":
         response = Formatter(result).machinify()
         print(json.dumps(response, indent=4))
 
-    elif format == 'table-markdown':
+    elif format == "table-markdown":
         response = Formatter(result).table_markdown()
         print(response)
 
     else:
-        raise ValueError('Unknown output format. Please specify "json", "json-machine" or "table-markdown".')
+        raise ValueError(
+            'Unknown output format. Please specify "json", "json-machine" or "table-markdown".'
+        )

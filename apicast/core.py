@@ -102,7 +102,10 @@ class DwdBeeflightForecast:
                     continue
                 label = item["label"]
                 station = Station(
-                    state=state, label=label, identifier=identifier, slug=f"{slugify(state.label)}/{slugify(label)}"
+                    state=state,
+                    label=label,
+                    identifier=identifier,
+                    slug=f"{slugify(state.label)}/{slugify(label)}",
                 )
 
                 stations.append(station)

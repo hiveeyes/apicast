@@ -7,7 +7,8 @@ from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
 from apicast import __appname__, __version__
-from apicast.core import dwd_source, dwd_copyright, producer_name, producer_link, DwdBeeflightForecast
+from apicast.core import (DwdBeeflightForecast, dwd_copyright, dwd_source,
+                          producer_link, producer_name)
 from apicast.format import Formatter
 
 app = FastAPI()
@@ -20,12 +21,12 @@ dbf = DwdBeeflightForecast()
 @app.get("/", response_class=HTMLResponse)
 def index():
 
-    appname = f'{__appname__} {__version__}'
-    description = 'Apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD).'
+    appname = f"{__appname__} {__version__}"
+    description = "Apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD)."
 
     data_index_items = []
     for location in dbf.get_station_slugs():
-        item = f'''
+        item = f"""
             <li>
                 <div style="float: left">
                 Forecast for {location}
@@ -42,7 +43,7 @@ def index():
                 </div>
                 <div style="clear: both"/>
             </li>
-        '''
+        """
         data_index_items.append(item)
 
     data_index_items_html = "\n".join(data_index_items)
@@ -127,7 +128,12 @@ def beeflight_stations_site_slugs():
 
 
 @app.get("/beeflight/forecast/germany/{state}/{station}")
-def beeflight_forecast_by_slug(state: str, station: str, format: str = Query(default='json'), translate: bool = Query(default=False)):
+def beeflight_forecast_by_slug(
+    state: str,
+    station: str,
+    format: str = Query(default="json"),
+    translate: bool = Query(default=False),
+):
 
     station_slug = f"{state}/{station}"
 
@@ -135,19 +141,19 @@ def beeflight_forecast_by_slug(state: str, station: str, format: str = Query(def
         station = dbf.get_station_by_slug(station_slug)
         result = dbf.get_data(station=station).copy()
         if not result.data:
-            raise ValueError('No data found or unable to parse')
+            raise ValueError("No data found or unable to parse")
     except Exception as ex:
-        return {'error': str(ex)}
+        return {"error": str(ex)}
 
     formatter = Formatter(result)
 
     if translate:
         formatter.translate()
 
-    if format == 'json-machine':
+    if format == "json-machine":
         response = formatter.machinify()
 
-    elif format == 'table-markdown':
+    elif format == "table-markdown":
         return PlainTextResponse(formatter.table_markdown())
 
     else:
@@ -158,21 +164,22 @@ def beeflight_forecast_by_slug(state: str, station: str, format: str = Query(def
 
 def make_json_response(location: str, data: list[dict]):
     response = {
-        'meta': {
-            'source': dwd_source,
-            'producer': f'{producer_name} - {producer_link}',
-            'copyright': dwd_copyright,
+        "meta": {
+            "source": dwd_source,
+            "producer": f"{producer_name} - {producer_link}",
+            "copyright": dwd_copyright,
         },
-        'location': {
-            'slug': location,
+        "location": {
+            "slug": location,
         },
-        'data': data,
+        "data": data,
     }
     return response
 
 
 def start_service(listen_address, reload: bool = False):
-    host, port = listen_address.split(':')
+    host, port = listen_address.split(":")
     port = int(port)
     from uvicorn.main import run
-    run(app='apicast.api:app', host=host, port=port, reload=reload)
+
+    run(app="apicast.api:app", host=host, port=port, reload=reload)
