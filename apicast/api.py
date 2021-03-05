@@ -2,6 +2,7 @@
 # (c) 2020-2021 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
 import logging
+from typing import List, Dict
 
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse, PlainTextResponse
@@ -162,7 +163,7 @@ def beeflight_forecast_by_slug(
     return make_json_response(location=station_slug, data=response)
 
 
-def make_json_response(location: str, data: list[dict]):
+def make_json_response(location: str, data: List[Dict]):
     response = {
         "meta": {
             "source": dwd_source,

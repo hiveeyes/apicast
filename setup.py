@@ -20,6 +20,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)",
@@ -67,6 +68,7 @@ setup(
         "html-table-extractor>=1,<2",
         "python-slugify>=4,<5",
         "docopt>=0.6,<1",
+        "munch>=2.5,<3",
         "jsonpickle>=2,<3"
         "python-slugify>=4,<5",
         "tabulate>=0.8,<1",

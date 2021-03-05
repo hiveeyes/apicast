@@ -45,7 +45,7 @@ class Station:
 class Result:
     station: Station
     station_name: str
-    data: list
+    data: List
     footnote: str
 
     def copy(self):

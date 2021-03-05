@@ -7,6 +7,11 @@ Development
 ===========
 
 
+2021-03-05 0.8.1
+================
+- Fix type hints and missing dependencies
+
+
 2021-03-05 0.8.0
 ================
 - Adjust scraping machinery to updated upstream interface
