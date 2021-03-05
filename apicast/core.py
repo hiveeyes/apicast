@@ -10,6 +10,7 @@ from https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.html.
 See also https://community.hiveeyes.org/t/dwd-prognose-bienenflug/787
 """
 import dataclasses
+from typing import List
 
 import requests
 import ttl_cache
@@ -59,9 +60,9 @@ class DwdBeeflightForecast:
     session.headers["User-Agent"] = user_agent
 
     @ttl_cache(60 * 60 * 24)
-    def get_states(self) -> list[State]:
+    def get_states(self) -> List[State]:
 
-        states: list[State] = []
+        states: List[State] = []
 
         # Request federal states.
         response = self.session.get(
@@ -78,9 +79,9 @@ class DwdBeeflightForecast:
         return states
 
     @ttl_cache(60 * 60 * 24)
-    def get_stations(self) -> list[Station]:
+    def get_stations(self) -> List[Station]:
 
-        stations: list[Station] = []
+        stations: List[Station] = []
 
         # Request federal states.
         for state in self.get_states():
@@ -110,7 +111,7 @@ class DwdBeeflightForecast:
 
         return stations
 
-    def get_station_slugs(self) -> list[str]:
+    def get_station_slugs(self) -> List[str]:
         slugs = []
         for station in self.get_stations():
             slugs.append(station.slug)
