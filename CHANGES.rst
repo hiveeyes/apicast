@@ -5,6 +5,10 @@ Apicast CHANGES
 
 Development
 ===========
+
+
+2021-03-05 0.8.0
+================
 - Adjust scraping machinery to updated upstream interface
 - Add software tests
 - Improve HTTP API and web interface
