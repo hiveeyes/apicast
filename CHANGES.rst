@@ -8,6 +8,7 @@ Development
 - Adjust scraping machinery to updated upstream interface
 - Add software tests
 - Improve HTTP API and web interface
+- Enable GHA CI
 
 
 2020-06-04 0.7.1
