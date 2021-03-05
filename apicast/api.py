@@ -19,8 +19,9 @@ dbf = DwdBeeflightForecast()
 
 @app.get("/", response_class=HTMLResponse)
 def index():
+
     appname = f'{__appname__} {__version__}'
-    about = 'Apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD).'
+    description = 'Apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD).'
 
     data_index_items = []
     for location in dbf.get_station_slugs():
@@ -36,7 +37,6 @@ def index():
                 English:
                     <a href="beeflight/forecast/germany/{location}?translate=true&format=json">[JSON]</a>
                     <a href="beeflight/forecast/germany/{location}?translate=true&format=table-markdown">[Markdown]</a>
-
                 Machine:
                     <a href="beeflight/forecast/germany/{location}?format=json-machine">[JSON]</a>
                 </div>
@@ -51,15 +51,47 @@ def index():
     <html>
         <head>
             <title>{appname}</title>
+
+            <meta name="description"
+                content="{description}">
+            <meta name="keywords"
+                content="honey bee, apis mellifera, flight forecast information, dwd, cdc, deutscher wetterdienst, climate data center, weather, opendata, data acquisition, transformation, export, geospatial, temporal, timeseries, sensor, network, observation, http, rest, api, json, markdown">
+
+            <meta property="og:title" content="{appname}"/>
+            <meta property="og:site_name" content="{appname}">
+            <meta property="og:description"
+                content="{description}"/>
+            <meta property="og:url" content="https://apicast.hiveeyes.org/"/>
+            <meta property="og:image" content="https://ptrace.hiveeyes.org/2021-03-05_beeswarm_plymouth.jpg"/>
+            <meta property="og:image:secure_url" content="https://ptrace.hiveeyes.org/2021-03-05_beeswarm_plymouth.jpg"/>
+            <meta property="og:type" content="website"/>
+
+            <meta name="twitter:title" content="{appname}">
+            <meta name="twitter:description" content="{description}">
+            <meta name="twitter:image" content="https://ptrace.hiveeyes.org/2021-03-05_beeswarm_plymouth.jpg">
+            <meta name="twitter:image:alt" content="Bee swarm in Plymouth">
+            <meta name="twitter:card" content="summary_large_image">
+
+            <script type='application/ld+json'>{{"@context":"https://schema.org","@type":"WebSite","@id":"#website","url":"https://apicast.hiveeyes.org/","name":"{appname}","logo":"https://ptrace.hiveeyes.org/2021-03-05_beeswarm_plymouth.jpg"}}</script>
+
         </head>
         <body>
-            <h3>About</h3>
-            {about}
-            <ul>
-            <li>Source: <a href="{dwd_source}">DWD » Freizeitgärtner » Gartenwetter » Prognose des Bienenfluges</a></li>
-            <li>Producer: <a href="{producer_link}">{producer_name}</a></li>
-            <li>Data copyright: {dwd_copyright}</li>
-            </ul>
+            <h2>About</h2>
+            <div style="width: 68%">
+                <div style="float: left">
+                {description}
+                <ul>
+                <li>Producer: <a href="{producer_link}">{producer_name}</a></li>
+                <li>Source: <a href="{dwd_source}">DWD » Freizeitgärtner » Gartenwetter » Prognose des Bienenfluges</a></li>
+                <li>Data copyright: {dwd_copyright}</li>
+                </ul>
+                </div>
+                <div style="float: right">
+                    <img src="https://ptrace.hiveeyes.org/2021-03-05_beeswarm_plymouth.jpg" width="200"/>
+                </div>
+            </div>
+            <div style="clear: both"/>
+
             <h3>Location index</h3>
             <ul>
             <li><a href="beeflight/stations/germany">List of federal states / stations</a></li>
@@ -139,8 +171,8 @@ def make_json_response(location: str, data: list[dict]):
     return response
 
 
-def start_service(listen_address):
+def start_service(listen_address, reload: bool = False):
     host, port = listen_address.split(':')
     port = int(port)
     from uvicorn.main import run
-    run(app='apicast.api:app', host=host, port=port, reload=True)
+    run(app='apicast.api:app', host=host, port=port, reload=reload)

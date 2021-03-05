@@ -22,7 +22,7 @@ def run():
     Usage:
       apicast beeflight stations [--slugs]
       apicast beeflight forecast --station=<station> [--format=<format>]
-      apicast service [--listen=<listen>]
+      apicast service [--listen=<listen>] [--reload]
       apicast --version
       apicast (-h | --help)
 
@@ -52,6 +52,12 @@ def run():
         # Display bee flight forecast for Potsdam in JSON machine readable format
         apicast beeflight forecast --station=brandenburg/potsdam --format=json-machine
 
+        # Start HTTP service
+        apicast service
+
+        # Start HTTP service with dynamic code reloading
+        apicast service --reload
+
     """
 
     name = f'{__appname__} {__version__}'
@@ -75,7 +81,7 @@ def run():
         log.info(f'Starting {name}')
         log.info(f'Starting web service on {listen_address}')
         from apicast.api import start_service
-        start_service(listen_address)
+        start_service(listen_address, options.reload)
         return
 
     dbf = DwdBeeflightForecast()

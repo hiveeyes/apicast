@@ -21,7 +21,7 @@ user_agent = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0"
 )
 dwd_source = "https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.html"
-dwd_copyright = "© Deutscher Wetterdienst (DWD), Abteilung Agrarmeteorologie"
+dwd_copyright = "© Deutscher Wetterdienst (DWD), Agricultural Meteorology Department"
 producer_name = "Hiveeyes Apicast"
 producer_link = "https://github.com/hiveeyes/apicast"
 
@@ -123,7 +123,7 @@ class DwdBeeflightForecast:
                 return station
         raise KeyError("No such station")
 
-    @ttl_cache(60)
+    @ttl_cache(60 * 60)
     def get_data(self, station: Station) -> Result:
 
         response = self.session.get(
