@@ -9,6 +9,7 @@ Development
 - Add software tests
 - Improve HTTP API and web interface
 - Enable GHA CI
+- Update README
 
 
 2020-06-04 0.7.1
