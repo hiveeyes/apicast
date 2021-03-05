@@ -135,7 +135,7 @@ class DwdBeeflightForecast:
             },
         )
 
-        soup = BeautifulSoup(markup=response.content, features="lxml")
+        soup = BeautifulSoup(markup=response.content, features="html.parser")
 
         # Find content section and extract elements.
         headline = soup.find(string="Prognose des Bienenfluges")

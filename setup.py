@@ -65,6 +65,7 @@ setup(
         "ttl-cache>=1.6,<2",
         "beautifulsoup4>=4,<5",
         "html-table-extractor>=1,<2",
+        "python-slugify>=4,<5",
         "docopt>=0.6,<1",
         "jsonpickle>=2,<3"
         "python-slugify>=4,<5",
