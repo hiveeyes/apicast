@@ -61,6 +61,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
+        "requests>=2,<3",
         "ttl-cache>=1.6,<2",
         "beautifulsoup4>=4,<5",
         "html-table-extractor>=1,<2",
