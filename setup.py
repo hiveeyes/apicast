@@ -8,7 +8,7 @@ README = open(os.path.join(here, "README.rst"), encoding="UTF-8").read()
 
 setup(
     name="apicast",
-    version="0.8.0",
+    version="0.8.1",
     description="Python client and HTTP service to access bee flight forecast "
                 "information published by Deutscher Wetterdienst (DWD), the "
                 "federal meteorological service in Germany.",
