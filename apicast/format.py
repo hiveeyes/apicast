@@ -40,8 +40,10 @@ class Formatter:
     def __init__(self, result):
         self.result = result
         self.data = result.data
+        self.title = u"### Prognose des Bienenfluges in {}".format(self.result.station_name)
 
     def translate(self):
+        self.title = u"### Beeflight forecast for {}".format(self.result.station_name)
         for item in self.data:
             for index, slot in enumerate(item):
                 for key, value in self.LABEL_MAP.items():
@@ -73,9 +75,7 @@ class Formatter:
         with io.StringIO() as buffer, redirect_stdout(buffer):
 
             # Report about weather station / observation location
-            print(
-                u"### Prognose des Bienenfluges in {}".format(self.result.station_name)
-            )
+            print(self.title)
             print()
 
             # Output forecast data

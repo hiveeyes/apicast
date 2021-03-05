@@ -7,6 +7,11 @@ Development
 ===========
 
 
+2021-03-05 0.8.3
+================
+- Fix translation of Markdown output
+
+
 2021-03-05 0.8.2
 ================
 - Fix HTTP API endpoint for locations
