@@ -9,14 +9,14 @@ README = open(os.path.join(here, "README.rst"), encoding="UTF-8").read()
 setup(
     name="apicast",
     version="0.7.1",
-    description="Python client to access bee flight forecast information published by Deutscher Wetterdienst (DWD), "
-    "the federal meteorological service in Germany.",
+    description="Python client and HTTP service to access bee flight forecast "
+                "information published by Deutscher Wetterdienst (DWD), the "
+                "federal meteorological service in Germany.",
     long_description=README,
     license="AGPL 3, EUPL 1.2",
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
@@ -57,7 +57,7 @@ setup(
     "geospatial temporal timeseries "
     "sensor network observation "
     "http rest api "
-    "json csv",
+    "json markdown",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
