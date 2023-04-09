@@ -5,9 +5,14 @@ Apicast CHANGES
 
 Development
 ===========
+
+
+2023-04-09 0.8.6
+================
 - Tests: Add more test cases to prepare automatic Dependabot updates
 - CI: Enable Dependabot notifications
 - Update flight intensity states: Add ``hoch`` and ``sehr hoch``
+- Update a few dependencies across the board
 
 
 2023-04-09 0.8.5
