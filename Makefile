@@ -25,6 +25,7 @@ virtualenv-dev: setup-virtualenv
 	@test -e $(apicast) || $(pip) install --upgrade --editable=.[service]
 	@test -e $(pytest) || $(pip) install --upgrade --requirement=requirements-test.txt
 
+# Install requirements for releasing.
 install-releasetools: setup-virtualenv
 	@$(pip) install --quiet --requirement requirements-release.txt --upgrade
 
@@ -60,15 +61,5 @@ pypi-upload: install-releasetools
 # ==============
 
 .PHONY: test
-pytest: virtualenv-dev
-
-	@# Run pytest.
-	$(pytest) test -vvv
-
-test: pytest
-
-test-coverage: virtualenv-dev
-	$(nosetests) \
-		--with-doctest --doctest-tests --doctest-extension=rst \
-		--with-coverage --cover-package=apicast --cover-tests \
-		--cover-html --cover-html-dir=coverage/html --cover-xml --cover-xml-file=coverage/coverage.xml
+test: virtualenv-dev
+	$(pytest)
