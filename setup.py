@@ -62,17 +62,16 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "requests>=2,<3",
-        "ttl-cache>=1.6,<2",
         "beautifulsoup4>=4,<5",
-        "html-table-extractor>=1,<2",
-        "python-slugify>=4,<5",
-        "docopt>=0.6,<1",
-        "munch>=2.5,<3",
-        "jsonpickle>=2,<3"
-        "python-slugify>=4,<5",
-        "tabulate>=0.8,<1",
         "dateparser>=0.7.4,<1",
+        "docopt>=0.6,<1",
+        "html-table-extractor>=1,<2",
+        "jsonpickle>=2,<3"
+        "munch>=2.5,<3",
+        "python-slugify>=4,<5",
+        "requests>=2,<3",
+        "tabulate>=0.8,<0.9",
+        "ttl-cache>=1.6,<2",
         "tzlocal>=2,<3",
     ],
     extras_require={
