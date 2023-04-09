@@ -14,7 +14,10 @@ class Formatter:
     Die Bedingungen für den Bienenflug werden in 5 Intensitätsstufen angegeben
     (kein - gering - mittel - stark - intensiv).
 
-    -- https://www.dwd.de/DE/fachnutzer/freizeitgaertner/dokumentation/gw_bienenflug
+    Die Flugaktivität reicht von geringer, über mittlerer und hoher bis sehr hoher Flugaktivität.
+
+    - https://www.dwd.de/DE/fachnutzer/landwirtschaft/dokumentationen/allgemein/bienenflug_doku.html
+    - https://www.dwd.de/DE/fachnutzer/landwirtschaft/dokumentationen/isabel/meinagrar_bienenflug.html?nn=629500
     """
 
     LABEL_MAP = {
@@ -27,6 +30,10 @@ class Formatter:
         "mittel": "medium",
         "stark": "strong",
         "intensiv": "intensive",
+        # Added 2023
+        # https://github.com/hiveeyes/apicast/issues/4
+        "hoch": "strong",
+        "sehr hoch": "intensive",
     }
 
     STRENGTH_MACHINE_MAP = {
