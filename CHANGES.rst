@@ -5,6 +5,10 @@ Apicast CHANGES
 
 Development
 ===========
+
+
+2023-04-09 0.8.4
+================
 - Fix HTML parsing. The section title changed to ``Prognose der
   Bienenflugintensität``.
 - Use ``apicast/<version>`` as HTTP user agent string
