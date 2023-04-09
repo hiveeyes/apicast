@@ -5,6 +5,7 @@ Apicast CHANGES
 
 Development
 ===========
+- Tests: Add more test cases to prepare automatic Dependabot updates
 
 
 2023-04-09 0.8.5

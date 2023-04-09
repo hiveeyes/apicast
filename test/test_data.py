@@ -3,13 +3,13 @@ import dataclasses
 import pytest
 from datadiff.tools import assert_equal
 
-from apicast.core import DwdBeeflightForecast
+from apicast.core import DwdBeeflightForecast, Station, State
 
 dbf = DwdBeeflightForecast()
 
 
 @pytest.mark.data
-def test_get_data():
+def test_get_data_success():
 
     stations = dbf.get_stations()
     bavaria_hof = [
@@ -42,3 +42,30 @@ def test_get_data():
             "footnote": None,
         },
     )
+
+
+@pytest.mark.data
+def test_get_data_invalid_station():
+    station = Station(
+        state=State(label='Nordrhein-Westfalen', identifier='bifl_bl999'),
+        label='Bielefeld',
+        identifier='bifl_bl999',
+        slug='nordrhein-westfalen/bielefeld',
+    )
+    with pytest.raises(ValueError) as ex:
+        dbf.get_data(station=station)
+    assert ex.match("No forecast available for this station")
+
+
+@pytest.mark.data
+def test_get_data_copy():
+
+    stations = dbf.get_stations()
+    bavaria_hof = [
+        station for station in stations if station.identifier == "bifl_0042"
+    ][0]
+
+    data_hof = dbf.get_data(station=bavaria_hof)
+    data_hof_copy = data_hof.copy()
+
+    assert id(data_hof) != id(data_hof_copy)
