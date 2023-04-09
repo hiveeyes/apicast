@@ -68,7 +68,7 @@ setup(
         "dateparser>=0.7.4,<2",
         "docopt>=0.6,<1",
         "html-table-extractor>=1,<2",
-        "jsonpickle>=2,<3",
+        "jsonpickle>=2,<4",
         "munch>=2.5,<3",
         "python-slugify>=4,<5",
         "requests>=2,<3",
