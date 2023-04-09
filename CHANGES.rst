@@ -7,6 +7,7 @@ Development
 ===========
 - Fix HTML parsing. The section title changed to ``Prognose der
   Bienenflugintensität``.
+- Use ``apicast/<version>`` as HTTP user agent string
 
 
 2021-03-05 0.8.3

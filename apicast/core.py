@@ -18,9 +18,10 @@ from bs4 import BeautifulSoup
 from html_table_extractor.extractor import Extractor
 from slugify import slugify
 
-user_agent = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:86.0) Gecko/20100101 Firefox/86.0"
-)
+from apicast import __appname__, __version__
+
+
+user_agent = f"{__appname__}/{__version__}"
 dwd_source = "https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.html"
 dwd_copyright = "© Deutscher Wetterdienst (DWD), Agricultural Meteorology Department"
 producer_name = "Hiveeyes Apicast"
