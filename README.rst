@@ -1,6 +1,10 @@
 .. image:: https://github.com/hiveeyes/apicast/workflows/Tests/badge.svg
     :target: https://github.com/hiveeyes/apicast/actions?workflow=Tests
 
+.. image:: https://codecov.io/gh/hiveeyes/apicast/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/hiveeyes/apicast
+    :alt: Test suite code coverage
+
 .. image:: https://img.shields.io/pypi/pyversions/apicast.svg
     :target: https://python.org
 
