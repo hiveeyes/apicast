@@ -153,6 +153,7 @@ Data
 
   - https://www.dwd.de/DE/fachnutzer/landwirtschaft/dokumentationen/allgemein/bienenflug_doku.html
   - https://www.dwd.de/DE/fachnutzer/landwirtschaft/dokumentationen/isabel/meinagrar_bienenflug.html
+  - https://www.dwd.de/DE/klimaumwelt/ku_beratung/landwirtschaft/agrar_modelle/Bienenflug.pdf?__blob=publicationFile
 
 - **Data copyright**: © Deutscher Wetterdienst (DWD), Agricultural Meteorology Department
 
