@@ -1,7 +1,3 @@
-#######
-Apicast
-#######
-
 .. image:: https://github.com/hiveeyes/apicast/workflows/Tests/badge.svg
     :target: https://github.com/hiveeyes/apicast/actions?workflow=Tests
 
@@ -17,8 +13,14 @@ Apicast
 .. image:: https://img.shields.io/pypi/l/apicast.svg
     :target: https://pypi.org/project/apicast/
 
-.. image:: https://img.shields.io/pypi/dm/apicast.svg
-    :target: https://pypi.org/project/apicast/
+.. image:: https://static.pepy.tech/badge/apicast/month
+    :target: https://pepy.tech/project/apicast
+
+|
+
+#######
+Apicast
+#######
 
 
 *****
