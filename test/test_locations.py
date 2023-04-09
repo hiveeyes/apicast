@@ -1,8 +1,9 @@
 import dataclasses
 
+import pytest
 from datadiff.tools import assert_equal
 
-from apicast.core import DwdBeeflightForecast
+from apicast.core import DwdBeeflightForecast, Station, State
 
 dbf = DwdBeeflightForecast()
 
@@ -56,3 +57,21 @@ def test_get_stations():
             },
         },
     )
+
+
+def test_get_station_by_slug_success():
+    station = dbf.get_station_by_slug("brandenburg/potsdam")
+
+    reference = Station(
+        state=State(label='Brandenburg', identifier='bifl_bl04'),
+        label='Potsdam',
+        identifier='bifl_0021',
+        slug='brandenburg/potsdam',
+    )
+    assert station == reference
+
+
+def test_get_station_by_slug_failure():
+    with pytest.raises(KeyError) as ex:
+        dbf.get_station_by_slug("foobar")
+    assert ex.match("No such station")
