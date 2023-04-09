@@ -5,6 +5,8 @@ Apicast CHANGES
 
 Development
 ===========
+- Fix HTML parsing. The section title changed to ``Prognose der
+  Bienenflugintensität``.
 
 
 2021-03-05 0.8.3

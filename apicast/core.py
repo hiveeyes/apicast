@@ -142,7 +142,7 @@ class DwdBeeflightForecast:
         soup = BeautifulSoup(markup=response.content, features="html.parser")
 
         # Find content section and extract elements.
-        headline = soup.find(string="Prognose des Bienenfluges")
+        headline = soup.find(string="Prognose der Bienenflugintensität")
         if not headline:
             raise ValueError("No forecast available for this station")
         station_name = headline.find_next("section").attrs.get("aria-label")
