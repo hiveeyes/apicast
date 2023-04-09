@@ -7,6 +7,11 @@ Development
 ===========
 
 
+2023-04-09 0.8.5
+================
+- Fix typo in ``setup.py``
+
+
 2023-04-09 0.8.4
 ================
 - Fix HTML parsing. The section title changed to ``Prognose der
