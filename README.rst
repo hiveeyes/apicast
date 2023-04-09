@@ -33,8 +33,8 @@ About
 
 Apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD).
 
-- **Live API**: http://apicast.hiveeyes.org/
-- **Development**: https://community.hiveeyes.org/t/dwd-prognose-bienenflug/787
+- **Development**: `Hiveeyes » DWD-Prognose Bienenflug`_
+- **Live API**: https://apicast.hiveeyes.org/ (also on HTTP)
 
 
 *****
@@ -151,8 +151,8 @@ Data
 
 - **Documentation**:
 
-  - https://www.dwd.de/DE/fachnutzer/freizeitgaertner/dokumentation/gw_bienenflug
-  - https://www.dwd.de/DE/fachnutzer/freizeitgaertner/dokumentation/gw_bienenflug.pdf?__blob=publicationFile
+  - https://www.dwd.de/DE/fachnutzer/landwirtschaft/dokumentationen/allgemein/bienenflug_doku.html
+  - https://www.dwd.de/DE/fachnutzer/landwirtschaft/dokumentationen/isabel/meinagrar_bienenflug.html
 
 - **Data copyright**: © Deutscher Wetterdienst (DWD), Agricultural Meteorology Department
 
@@ -167,3 +167,6 @@ Logo picture
 - **Camera location**:	50° 24′ 38.3″ N, 4° 09′ 28.2″ W
 - **License**:          Creative Commons Attribution-Share Alike 3.0 Unported
 - **URL**:              https://commons.wikimedia.org/wiki/File:Bee_swarm_in_Plymouth.jpg
+
+
+.. _Hiveeyes » DWD-Prognose Bienenflug: https://community.hiveeyes.org/t/dwd-prognose-bienenflug/787
