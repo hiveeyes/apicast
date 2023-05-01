@@ -74,7 +74,7 @@ setup(
         "requests>=2,<3",
         "tabulate>=0.8,<0.10",
         "ttl-cache>=1.6,<2",
-        "tzlocal>=2,<3",
+        "tzlocal>=2,<5",
     ],
     extras_require={
         "service": [
