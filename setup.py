@@ -69,7 +69,7 @@ setup(
         "docopt>=0.6,<1",
         "html-table-extractor>=1,<2",
         "jsonpickle>=2,<4",
-        "munch>=2.5,<3",
+        "munch>=2.5,<4",
         "python-slugify>=4,<9",
         "requests>=2,<3",
         "tabulate>=0.8,<0.10",
