@@ -79,7 +79,7 @@ setup(
     extras_require={
         "service": [
             "fastapi>=0.55.1,<0.96",
-            "uvicorn<=0.22.0",
+            "uvicorn<=0.23.2",
         ],
     },
     entry_points={"console_scripts": ["apicast = apicast.cli:run"]},
