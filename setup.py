@@ -78,7 +78,7 @@ setup(
     ],
     extras_require={
         "service": [
-            "fastapi>=0.55.1,<0.96",
+            "fastapi>=0.55.1,<0.105",
             "uvicorn<=0.22.0",
         ],
     },
