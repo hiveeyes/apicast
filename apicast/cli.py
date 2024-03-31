@@ -58,7 +58,7 @@ def run():
         # Start HTTP service with dynamic code reloading
         apicast service --reload
 
-    """
+    """  # noqa: E501
 
     name = f"{__appname__} {__version__}"
 
@@ -89,7 +89,6 @@ def run():
 
     # Run command.
     if options.stations:
-
         if options.slugs:
             result = dbf.get_station_slugs()
             print("\n".join(result))
@@ -106,7 +105,6 @@ def run():
 
 
 def format_beeflight_forecast(result, format="json"):
-
     if not result.data:
         raise ValueError("No data found or unable to parse")
 

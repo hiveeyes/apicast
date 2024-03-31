@@ -2,7 +2,6 @@ from starlette.testclient import TestClient
 
 from apicast.api import app
 
-
 client = TestClient(app)
 
 
