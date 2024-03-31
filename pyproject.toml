@@ -1,0 +1,94 @@
+[tool.pytest.ini_options]
+addopts = """
+  -ra -q --verbosity=3
+  --cov --cov-report=term-missing --cov-report=xml
+"""
+minversion = "2.0"
+log_level = "DEBUG"
+log_cli_level = "DEBUG"
+testpaths = [
+  "apicast",
+  "test",
+]
+xfail_strict = true
+
+[tool.coverage.run]
+source = ["apicast"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 0
+omit = [
+    "test/*",
+]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = [
+]
+
+[tool.ruff.lint]
+select = [
+    # Pycodestyle
+    "E",
+    "W",
+    # Pyflakes
+    "F",
+    # isort
+    "I",
+    # Bandit
+    "S",
+    # flake8-quotes
+    "Q",
+    # eradicate
+    "ERA",
+    # flake8-2020
+    "YTT",
+    # print
+    "T20",
+    # return
+    "RET",
+    # pyupgrade
+    # "UP",
+    # flake8-commas
+    "COM",
+    # future-annotations
+    # "FA",
+    # flake8-type-checking
+    "TCH",
+    # flake8-unused-arguments
+    "ARG",
+    # flake8-use-pathlib
+    # "PTH"
+]
+extend-ignore = [
+    # Unnecessary `elif` after `return` or `raise` statement.
+    "RET505",
+    "RET506",
+    # No trailing commas.
+    "COM812"
+]
+unfixable = ["ERA", "F401", "F841", "T20", "ERA001"]
+
+[tool.ruff.lint.per-file-ignores]
+"apicast/cli.py" = ["T201"]
+"test/*" = ["S101"]
+
+
+# ===================
+# Tasks configuration
+# ===================
+
+[tool.poe.tasks]
+format = [
+  {cmd="ruff format"},
+  {cmd="ruff check --fix"},
+]
+lint = [
+  {cmd="ruff check"},
+]
+test = [
+  {cmd="pytest"},
+]
+build = {cmd="python -m build"}
+check = ["lint", "test"]

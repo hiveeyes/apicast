@@ -48,10 +48,10 @@ class Formatter:
     def __init__(self, result):
         self.result = deepcopy(result)
         self.data = self.result.data
-        self.title = u"### Prognose des Bienenfluges in {}".format(self.result.station_name)
+        self.title = "### Prognose des Bienenfluges in {}".format(self.result.station_name)
 
     def translate(self):
-        self.title = u"### Beeflight forecast for {}".format(self.result.station_name)
+        self.title = "### Beeflight forecast for {}".format(self.result.station_name)
         for item in self.data:
             for index, slot in enumerate(item):
                 for key, value in self.LABEL_MAP.items():
@@ -79,9 +79,9 @@ class Formatter:
                 item[key] = value
         return data
 
+    # ruff: noqa: T201
     def table_markdown(self):
         with io.StringIO() as buffer, redirect_stdout(buffer):
-
             # Report about weather station / observation location
             print(self.title)
             print()

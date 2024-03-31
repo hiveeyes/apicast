@@ -32,7 +32,6 @@ def configure_http_logging(options):
 def normalize_options(options):
     normalized = {}
     for key, value in options.items():
-
         # Add primary variant.
         key = key.strip("--<>")
         normalized[key] = value

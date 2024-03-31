@@ -9,6 +9,7 @@ from https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.html.
 
 See also https://community.hiveeyes.org/t/dwd-prognose-bienenflug/787
 """
+
 import dataclasses
 from typing import List
 
@@ -19,7 +20,6 @@ from html_table_extractor.extractor import Extractor
 from slugify import slugify
 
 from apicast import __appname__, __version__
-
 
 user_agent = f"{__appname__}/{__version__}"
 dwd_source = "https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.html"
@@ -54,7 +54,6 @@ class Result:
 
 
 class DwdBeeflightForecast:
-
     baseurl = "https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.json?cl2Categories_LeistungsId=bienenflug"
 
     session = requests.Session()
@@ -62,7 +61,6 @@ class DwdBeeflightForecast:
 
     @ttl_cache(60 * 60 * 24)
     def get_states(self) -> List[State]:
-
         states: List[State] = []
 
         # Request federal states.
@@ -75,18 +73,16 @@ class DwdBeeflightForecast:
 
             states.append(state)
 
-        # sites.sort(key=operator.attrgetter("label"))
+        # sites.sort(key=operator.attrgetter("label"))  # noqa: ERA001
 
         return states
 
     @ttl_cache(60 * 60 * 24)
     def get_stations(self) -> List[Station]:
-
         stations: List[Station] = []
 
         # Request federal states.
         for state in self.get_states():
-
             # Request sites.
             response = self.session.get(
                 self.baseurl,
@@ -111,7 +107,7 @@ class DwdBeeflightForecast:
 
                 stations.append(station)
 
-        # sites.sort(key=operator.attrgetter("label"))
+        # sites.sort(key=operator.attrgetter("label"))  # noqa: ERA001
 
         return stations
 
@@ -130,7 +126,6 @@ class DwdBeeflightForecast:
 
     @ttl_cache(60 * 60)
     def get_data(self, station: Station) -> Result:
-
         response = self.session.get(
             self.baseurl,
             params={
@@ -155,10 +150,7 @@ class DwdBeeflightForecast:
         data = self.parse_html_table(table)
 
         # Ready.
-        result = Result(
-            station=station, station_name=station_name, data=data, footnote=footnote
-        )
-        return result
+        return Result(station=station, station_name=station_name, data=data, footnote=footnote)
 
     @staticmethod
     def parse_html_table(html):

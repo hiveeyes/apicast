@@ -2,14 +2,19 @@
 # (c) 2020-2021 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
 import logging
-from typing import List, Dict
+from typing import Dict, List
 
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
 from apicast import __appname__, __version__
-from apicast.core import (DwdBeeflightForecast, dwd_copyright, dwd_source,
-                          producer_link, producer_name)
+from apicast.core import (
+    DwdBeeflightForecast,
+    dwd_copyright,
+    dwd_source,
+    producer_link,
+    producer_name,
+)
 from apicast.format import Formatter
 
 app = FastAPI()
@@ -21,9 +26,11 @@ dbf = DwdBeeflightForecast()
 
 @app.get("/", response_class=HTMLResponse)
 def index():
-
     appname = f"{__appname__} {__version__}"
-    description = "Apicast acquires bee flight forecast information published by Deutscher Wetterdienst (DWD)."
+    description = (
+        "Apicast acquires bee flight forecast information "
+        "published by Deutscher Wetterdienst (DWD)."
+    )
 
     data_index_items = []
     for location in dbf.get_station_slugs():
@@ -44,7 +51,7 @@ def index():
                 </div>
                 <div style="clear: both"/>
             </li>
-        """
+        """  # noqa: E501
         data_index_items.append(item)
 
     data_index_items_html = "\n".join(data_index_items)
@@ -105,12 +112,12 @@ def index():
             </ul>
         </body>
     </html>
-    """
+    """  # noqa: E501
 
 
 @app.get("/robots.txt", response_class=PlainTextResponse)
 def robots():
-    return f"""
+    return """
 User-agent: *
 Disallow: /beeflight/
     """.strip()
@@ -135,7 +142,6 @@ def beeflight_forecast_by_slug(
     format: str = Query(default="json"),
     translate: bool = Query(default=False),
 ):
-
     station_slug = f"{state}/{station}"
 
     try:
@@ -164,7 +170,7 @@ def beeflight_forecast_by_slug(
 
 
 def make_json_response(data: List[Dict], location: str = None):
-    response = {
+    return {
         "meta": {
             "source": dwd_source,
             "producer": f"{producer_name} - {producer_link}",
@@ -175,7 +181,6 @@ def make_json_response(data: List[Dict], location: str = None):
         },
         "data": data,
     }
-    return response
 
 
 def start_service(listen_address, reload: bool = False):

@@ -47,8 +47,14 @@ jobs:
           pip install --requirement=requirements-test.txt
           pip install --editable=.[service]
 
-      - name: Run tests
-        run: pytest
+      - name: Run linters
+        if: matrix.python-version != '3.6' && matrix.python-version != '3.7'
+        run: |
+          poe lint
+
+      - name: Run software tests
+        run: |
+          poe test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4

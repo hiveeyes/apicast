@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 from io import open
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, "README.rst"), encoding="UTF-8").read()
@@ -10,8 +11,8 @@ setup(
     name="apicast",
     version="0.8.6",
     description="Python client and HTTP service to access bee flight forecast "
-                "information published by Deutscher Wetterdienst (DWD), the "
-                "federal meteorological service in Germany.",
+    "information published by Deutscher Wetterdienst (DWD), the "
+    "federal meteorological service in Germany.",
     long_description=README,
     license="AGPL 3, EUPL 1.2",
     classifiers=[
