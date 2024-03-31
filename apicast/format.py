@@ -9,6 +9,8 @@ from datetime import datetime
 import tabulate
 from dateparser import parse as parsedate
 
+from apicast.core import apicast_link, apicast_name, dwd_copyright, dwd_link, dwd_name
+
 
 class Formatter:
     """
@@ -94,6 +96,17 @@ class Formatter:
                     showindex=False,
                     tablefmt="pipe",
                 )
+            )
+
+            print()
+            print(
+                f"""
+{dwd_copyright}
+[{dwd_name}] • [{apicast_name}]
+
+[{dwd_name}]: {dwd_link}
+[{apicast_name}]: {apicast_link}
+""".strip()
             )
 
             return buffer.getvalue()

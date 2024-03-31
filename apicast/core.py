@@ -22,10 +22,11 @@ from slugify import slugify
 from apicast import __appname__, __version__
 
 user_agent = f"{__appname__}/{__version__}"
-dwd_source = "https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.html"
-dwd_copyright = "© Deutscher Wetterdienst (DWD), Agricultural Meteorology Department"
-producer_name = "Hiveeyes Apicast"
-producer_link = "https://github.com/hiveeyes/apicast"
+dwd_copyright = "© Deutscher Wetterdienst (DWD)"
+dwd_name = "DWD Agricultural Meteorology Department"
+dwd_link = "https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.html"
+apicast_name = "Hiveeyes Apicast"
+apicast_link = "https://github.com/hiveeyes/apicast"
 
 
 @dataclasses.dataclass

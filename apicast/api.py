@@ -10,10 +10,11 @@ from fastapi.responses import HTMLResponse, PlainTextResponse
 from apicast import __appname__, __version__
 from apicast.core import (
     DwdBeeflightForecast,
+    apicast_link,
+    apicast_name,
     dwd_copyright,
-    dwd_source,
-    producer_link,
-    producer_name,
+    dwd_link,
+    dwd_name,
 )
 from apicast.format import Formatter
 
@@ -90,8 +91,8 @@ def index():
                 <div style="float: left">
                 {description}
                 <ul>
-                <li>Producer: <a href="{producer_link}">{producer_name}</a></li>
-                <li>Source: <a href="{dwd_source}">DWD » Freizeitgärtner » Gartenwetter » Prognose des Bienenfluges</a></li>
+                <li>Producer: <a href="{apicast_link}">{apicast_name}</a></li>
+                <li>Source: <a href="{dwd_link}">DWD » Freizeitgärtner » Gartenwetter » Prognose des Bienenfluges</a></li>
                 <li>Data copyright: {dwd_copyright}</li>
                 </ul>
                 </div>
@@ -172,9 +173,9 @@ def beeflight_forecast_by_slug(
 def make_json_response(data: List[Dict], location: str = None):
     return {
         "meta": {
-            "source": dwd_source,
-            "producer": f"{producer_name} - {producer_link}",
             "copyright": dwd_copyright,
+            "source": f"{dwd_name} - {dwd_link}",
+            "producer": f"{apicast_name} - {apicast_link}",
         },
         "location": {
             "slug": location,
