@@ -67,7 +67,7 @@ setup(
     install_requires=[
         "beautifulsoup4>=4,<5",
         "dateparser>=0.7.4,<2",
-        "docopt>=0.6,<1",
+        "docopt-ng>=0.6,<0.10",
         "html-table-extractor>=1,<2",
         "jsonpickle>=2,<4",
         "munch>=2.5,<5",
