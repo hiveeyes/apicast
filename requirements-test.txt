@@ -1,5 +1,5 @@
 datadiff>=2.0,<3
 fastapi[test]
-marko<2
+marko<3
 pytest>=6.1.0,<8
-pytest-cov<5
+pytest-cov<6
