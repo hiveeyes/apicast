@@ -3,6 +3,7 @@
 # License: GNU Affero General Public License, Version 3
 import io
 from contextlib import redirect_stdout
+from copy import deepcopy
 from datetime import datetime
 
 import tabulate
@@ -32,8 +33,8 @@ class Formatter:
         "intensiv": "intensive",
         # Added 2023
         # https://github.com/hiveeyes/apicast/issues/4
-        "hoch": "strong",
         "sehr hoch": "intensive",
+        "hoch": "strong",
     }
 
     STRENGTH_MACHINE_MAP = {
@@ -45,8 +46,8 @@ class Formatter:
     }
 
     def __init__(self, result):
-        self.result = result
-        self.data = result.data
+        self.result = deepcopy(result)
+        self.data = self.result.data
         self.title = u"### Prognose des Bienenfluges in {}".format(self.result.station_name)
 
     def translate(self):

@@ -7,6 +7,7 @@ Development
 ===========
 - Add support for Python 3.12
 - Dependencies: Update from docopt to docopt-ng
+- Fix translation "sehr hoch" => "intensive"
 
 
 2023-04-09 0.8.6
