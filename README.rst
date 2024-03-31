@@ -1,30 +1,37 @@
-.. image:: https://github.com/hiveeyes/apicast/workflows/Tests/badge.svg
-    :target: https://github.com/hiveeyes/apicast/actions?workflow=Tests
-
-.. image:: https://codecov.io/gh/hiveeyes/apicast/branch/main/graph/badge.svg
-    :target: https://codecov.io/gh/hiveeyes/apicast
-    :alt: Test suite code coverage
-
-.. image:: https://img.shields.io/pypi/pyversions/apicast.svg
-    :target: https://python.org
-
-.. image:: https://img.shields.io/pypi/v/apicast.svg
-    :target: https://pypi.org/project/apicast/
-
-.. image:: https://img.shields.io/pypi/status/apicast.svg
-    :target: https://pypi.org/project/apicast/
-
-.. image:: https://img.shields.io/pypi/l/apicast.svg
-    :target: https://pypi.org/project/apicast/
-
-.. image:: https://static.pepy.tech/badge/apicast/month
-    :target: https://pepy.tech/project/apicast
-
-|
-
 #######
 Apicast
 #######
+
+|
+
+.. start-badges
+
+|ci-tests| |ci-coverage| |license| |pypi-downloads|
+|python-versions| |status| |pypi-version|
+
+.. |ci-tests| image:: https://github.com/hiveeyes/apicast/workflows/Tests/badge.svg
+    :target: https://github.com/hiveeyes/apicast/actions?workflow=Tests
+
+.. |ci-coverage| image:: https://codecov.io/gh/hiveeyes/apicast/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/hiveeyes/apicast
+    :alt: Test suite code coverage
+
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/apicast.svg
+    :target: https://python.org
+
+.. |pypi-version| image:: https://img.shields.io/pypi/v/apicast.svg
+    :target: https://pypi.org/project/apicast/
+
+.. |status| image:: https://img.shields.io/pypi/status/apicast.svg
+    :target: https://pypi.org/project/apicast/
+
+.. |license| image:: https://img.shields.io/pypi/l/apicast.svg
+    :target: https://pypi.org/project/apicast/
+
+.. |pypi-downloads| image:: https://static.pepy.tech/badge/apicast/month
+    :target: https://pepy.tech/project/apicast
+
+.. end-badges
 
 
 *****
