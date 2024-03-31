@@ -7,3 +7,5 @@ Apicast backlog
 - [o] Convert ``extract_sites.sh`` to Python
 - [x] Add HTTP API based on FastAPI
 - [o] Investigate JSON API at https://www.dwd.de/DE/leistungen/biene_flug/bienenflug.html
+  - https://www.dwd.de/SiteGlobals/Functions/CityWeather/RenderCityWeather.json?view=renderCityWeather
+
