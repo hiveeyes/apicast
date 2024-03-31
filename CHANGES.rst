@@ -5,11 +5,13 @@ Apicast CHANGES
 
 Development
 ===========
+
+2024-03-31 0.9.0
+================
 - Add support for Python 3.12
 - Dependencies: Update from docopt to docopt-ng
 - Fix translation "sehr hoch" => "intensive"
 - Add content and copyright attribution to Markdown output
-
 
 2023-04-09 0.8.6
 ================
