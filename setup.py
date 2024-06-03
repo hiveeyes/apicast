@@ -82,7 +82,7 @@ setup(
         "service": [
             "fastapi>=0.55.1,<0.111",
             "httpx<1",
-            "uvicorn<=0.29.0",
+            "uvicorn<=0.30.1",
         ],
     },
     entry_points={"console_scripts": ["apicast = apicast.cli:run"]},
