@@ -1,7 +1,7 @@
 datadiff>=2.0,<3
 fastapi[test]
 marko<3
-poethepoet<0.26
+poethepoet<0.28
 pytest>=6.1.0,<9
 pytest-cov<6
 ruff<0.4;python_version>='3.7'
