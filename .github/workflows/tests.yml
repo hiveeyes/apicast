@@ -22,8 +22,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ "ubuntu-20.04" ]
-        python-version: [ "3.6", "3.12" ]
+        os: [ "ubuntu-22.04" ]
+        python-version: [
+          "3.7",
+          "3.12",
+        ]
 
     name: Python ${{ matrix.python-version }} on OS ${{ matrix.os }}
     steps:
