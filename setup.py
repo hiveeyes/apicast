@@ -70,7 +70,7 @@ setup(
         "dateparser>=0.7.4,<2",
         "docopt-ng>=0.6,<0.10",
         "html-table-extractor>=1,<2",
-        "jsonpickle>=2,<4",
+        "jsonpickle>=2,<5",
         "munch>=2.5,<5",
         "python-slugify>=4,<9",
         "requests>=2.25.2,<3",
