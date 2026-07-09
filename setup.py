@@ -74,7 +74,7 @@ setup(
         "munch>=2.5,<5",
         "python-slugify>=4,<9",
         "requests>=2.25.2,<3",
-        "tabulate>=0.8,<0.10",
+        "tabulate>=0.8,<0.11",
         "ttl-cache>=1.6,<2",
         "tzlocal>=2,<6",
     ],
