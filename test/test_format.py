@@ -58,9 +58,9 @@ def test_format_normalize(formatter: Formatter):
 
 def test_format_machinify(formatter: Formatter):
     assert formatter.machinify() == [
-        {"date": "2024-03-30", "evening": 3, "morning": 2, "noon": 4},
-        {"date": "2024-03-31", "evening": 3, "morning": 2, "noon": 3},
-        {"date": "2024-04-01", "evening": 2, "morning": 2, "noon": 3},
+        {"date": "2026-03-30", "evening": 3, "morning": 2, "noon": 4},
+        {"date": "2026-03-31", "evening": 3, "morning": 2, "noon": 3},
+        {"date": "2026-04-01", "evening": 2, "morning": 2, "noon": 3},
     ]
 
 
