@@ -4,4 +4,4 @@ marko<3
 poethepoet<1
 pytest<10
 pytest-cov<8
-ruff<0.16;python_version>='3.7'
+ruff<0.17;python_version>='3.7'
