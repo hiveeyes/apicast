@@ -80,7 +80,7 @@ setup(
     ],
     extras_require={
         "service": [
-            "fastapi>=0.55.1,<0.140",
+            "fastapi>=0.55.1,<0.142",
             "httpx<1",
             "uvicorn<=0.51.0",
         ],
