@@ -72,7 +72,7 @@ setup(
         "html-table-extractor>=1,<2",
         "jsonpickle>=2,<5",
         "munch>=2.5,<5",
-        "python-slugify>=4,<9",
+        "python-slugify>=4,<10",
         "requests>=2.25.2,<3",
         "tabulate>=0.8,<0.11",
         "ttl-cache>=1.6,<2",
