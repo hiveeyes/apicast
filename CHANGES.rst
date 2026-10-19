@@ -5,6 +5,9 @@ Apicast CHANGES
 
 Development
 ===========
+
+2026-10-19 0.9.1
+================
 - Verified support on Python 3.15
 
 2024-03-31 0.9.0
